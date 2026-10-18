@@ -110,10 +110,13 @@
     gsap.to('.hero__phone', { y: -110, ease: 'none', scrollTrigger: parallax });
 
     /* 4.3 Imagen del proyecto: se "descubre" de abajo arriba */
-    gsap.fromTo('.project__media',
-      { clipPath: 'inset(12% 6% 12% 6% round 14px)', opacity: 0.4 },
-      { clipPath: 'inset(0% 0% 0% 0% round 14px)', opacity: 1, ease: 'none',
-        scrollTrigger: { trigger: '.project', start: 'top 85%', end: 'top 35%', scrub: 0.6 } });
+    // Cada proyecto tiene su propio disparador
+    document.querySelectorAll('.project').forEach(function (project) {
+      gsap.fromTo(project.querySelector('.project__media'),
+        { clipPath: 'inset(12% 6% 12% 6% round 14px)', opacity: 0.4 },
+        { clipPath: 'inset(0% 0% 0% 0% round 14px)', opacity: 1, ease: 'none',
+          scrollTrigger: { trigger: project, start: 'top 85%', end: 'top 35%', scrub: 0.6 } });
+    });
 
     /* 4.4 Línea del proceso que se rellena con el scroll */
     gsap.to('.steps__progress', {
