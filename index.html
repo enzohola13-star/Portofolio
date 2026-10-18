@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Enzo · Diseño y desarrollo web para negocios</title>
+  <meta name="description" content="Soy Enzo, diseñador y desarrollador web freelance. Creo webs modernas, rápidas y adaptadas al móvil para negocios que quieren destacar.">
+  <meta name="theme-color" content="#0c0c0e">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp, LinkedIn…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Enzo · Diseño y desarrollo web para negocios">
+  <meta property="og:description" content="Webs modernas, rápidas y a medida para negocios que quieren destacar.">
+  <meta property="og:image" content="img/og-image.jpg">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Activa las animaciones solo si hay JS y no se pide movimiento reducido.
+       Si GSAP no carga en 3 s, se quita la clase para que nada quede oculto. -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        d.classList.add('anim');
+        setTimeout(function () { if (!window.gsap) d.classList.remove('anim'); }, 3000);
+      }
+    })();
+  </script>
+
+  <!-- Tipografías: Bricolage Grotesque (títulos) + Geist (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="preload" as="image" href="img/studio-nara-escritorio-800.webp"
+        imagesrcset="img/studio-nara-escritorio-800.webp 800w, img/studio-nara-escritorio.webp 1440w"
+        imagesizes="(min-width: 1024px) 50vw, 100vw">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ============ CABECERA ============ -->
+  <header class="site-header" id="cabecera">
+    <div class="container site-header__inner">
+      <a class="logo" href="#inicio" aria-label="Enzo, ir al inicio">enzo<span>.</span></a>
+
+      <nav class="nav" aria-label="Principal">
+        <ul class="nav__list">
+          <li><a href="#proyecto">Proyecto</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn--accent btn--small" href="#contacto">Hablemos</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <p class="status hero__status"><span class="status__dot" aria-hidden="true"></span> Disponible para nuevos proyectos</p>
+
+          <!-- Cada .line se anima por separado -->
+          <h1 class="hero__title" id="hero-titulo">
+            <span class="line"><span class="line__inner">Webs a medida</span></span>
+            <span class="line"><span class="line__inner">para negocios que</span></span>
+            <span class="line"><span class="line__inner">quieren <em>destacar.</em></span></span>
+          </h1>
+
+          <p class="hero__lead">Soy Enzo, diseñador y desarrollador web freelance. Creo webs rápidas, modernas y fáciles de usar, pensadas para que tus clientes te encuentren y te contacten.</p>
+
+          <div class="hero__actions">
+            <a class="btn btn--accent" href="#contacto">
+              Pide presupuesto
+              <svg class="btn__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#proyecto">Ver proyecto</a>
+          </div>
+        </div>
+
+        <!-- Maquetas de navegador y móvil con el proyecto Studio Nara -->
+        <div class="hero__visual" aria-hidden="true">
+          <div class="browser hero__browser">
+            <div class="browser__bar">
+              <span class="browser__dots"><i></i><i></i><i></i></span>
+              <span class="browser__url">studio-nara-peluqueria.netlify.app</span>
+            </div>
+            <img src="img/studio-nara-escritorio-800.webp"
+                 srcset="img/studio-nara-escritorio-800.webp 800w, img/studio-nara-escritorio.webp 1440w"
+                 sizes="(min-width: 1024px) 50vw, 100vw"
+                 width="1440" height="840" alt="" fetchpriority="high">
+          </div>
+          <div class="phone hero__phone">
+            <img src="img/studio-nara-movil.webp" width="400" height="800" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cinta en movimiento con lo que incluyen las webs -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Diseño a medida</span><span>Adaptada al móvil</span><span>Carga rápida</span><span>Botón de WhatsApp</span><span>SEO básico</span><span>Animaciones suaves</span>
+        <span>Diseño a medida</span><span>Adaptada al móvil</span><span>Carga rápida</span><span>Botón de WhatsApp</span><span>SEO básico</span><span>Animaciones suaves</span>
+      </div>
+    </div>
+
+    <!-- ============ 2. PROYECTO DESTACADO ============ -->
+    <section class="section" id="proyecto" aria-labelledby="proyecto-titulo">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Proyecto destacado</p>
+          <h2 class="section-title" id="proyecto-titulo">Una web pensada para <em>llenar la agenda.</em></h2>
+        </header>
+
+        <article class="project">
+          <a class="project__media" href="https://studio-nara-peluqueria.netlify.app" target="_blank" rel="noopener" aria-label="Abrir la web de Studio Nara (se abre en una pestaña nueva)">
+            <div class="browser">
+              <div class="browser__bar" aria-hidden="true">
+                <span class="browser__dots"><i></i><i></i><i></i></span>
+                <span class="browser__url">studio-nara-peluqueria.netlify.app</span>
+              </div>
+              <div class="project__img">
+                <img src="img/studio-nara-galeria-800.webp"
+                     srcset="img/studio-nara-galeria-800.webp 800w, img/studio-nara-galeria.webp 1320w"
+                     sizes="(min-width: 1024px) 60vw, 100vw"
+                     width="1320" height="770" loading="lazy" decoding="async"
+                     alt="Sección de trabajos de Studio Nara: comparador antes y después de un balayage">
+              </div>
+            </div>
+            <span class="project__open" aria-hidden="true">
+              Ver web
+              <svg viewBox="0 0 24 24" width="16" height="16"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+
+          <div class="project__info" data-reveal>
+            <p class="project__meta">Peluquería · Madrid · Proyecto conceptual</p>
+            <h3 class="project__title">Studio Nara</h3>
+            <p class="project__desc">Web para una peluquería de autor. El objetivo: transmitir un servicio cuidado y que reservar sea muy fácil. Servicios con precios claros, galería antes/después interactiva, equipo, opiniones y reserva directa por WhatsApp.</p>
+
+            <ul class="tags" role="list">
+              <li>Diseño</li>
+              <li>Desarrollo</li>
+              <li>Responsive</li>
+              <li>Animaciones GSAP</li>
+            </ul>
+
+            <div class="project__links">
+              <a class="btn btn--light" href="https://studio-nara-peluqueria.netlify.app" target="_blank" rel="noopener">
+                Ver web
+                <svg class="btn__icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a class="link-arrow" href="https://github.com/enzohola13-star/studio-nara" target="_blank" rel="noopener">Ver código <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta-invitación para el siguiente cliente -->
+        <a class="next-card" href="#contacto" data-reveal>
+          <span class="next-card__text">¿Tu negocio podría ser el siguiente?</span>
+          <span class="next-card__cta">Hablemos <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ 3. SERVICIOS ============ -->
+    <section class="section section--alt" id="servicios" aria-labelledby="servicios-titulo">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Servicios</p>
+          <h2 class="section-title" id="servicios-titulo">Lo que puedo <em>hacer por ti.</em></h2>
+        </header>
+
+        <ul class="services" role="list">
+          <li class="service" data-reveal>
+            <span class="service__num">01</span>
+            <h3 class="service__title">Web completa</h3>
+            <p>Presencia profesional para tu negocio: inicio, servicios, galería, ubicación y contacto, todo en una web a tu medida.</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">02</span>
+            <h3 class="service__title">Landing page</h3>
+            <p>Una sola página enfocada en un objetivo: conseguir reservas, llamadas o clientes para un servicio concreto.</p>
+          </li>
+          <li class="service" data-reveal>
+            <span class="service__num">03</span>
+            <h3 class="service__title">Rediseño</h3>
+            <p>¿Ya tienes web pero se ha quedado antigua? La renuevo para que sea moderna, rápida y se vea bien en el móvil.</p>
+          </li>
+        </ul>
+
+        <div class="includes" data-reveal>
+          <h3 class="includes__title">Todas mis webs incluyen</h3>
+          <ul class="includes__list" role="list">
+            <li>Diseño adaptado a móvil, tablet y ordenador</li>
+            <li>Carga rápida, también con datos móviles</li>
+            <li>Botón de WhatsApp, llamada o reserva</li>
+            <li>Mapa, horario y datos de contacto</li>
+            <li>SEO básico para aparecer en Google</li>
+            <li>Publicación online y configuración del dominio</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. PROCESO ============ -->
+    <section class="section" id="proceso" aria-labelledby="proceso-titulo">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Proceso</p>
+          <h2 class="section-title" id="proceso-titulo">Así trabajamos, <em>paso a paso.</em></h2>
+        </header>
+
+        <!-- La línea de progreso (.steps__progress) se rellena con el scroll -->
+        <div class="steps">
+          <span class="steps__line" aria-hidden="true"><span class="steps__progress"></span></span>
+          <ol class="steps__list" role="list">
+          <li class="step" data-reveal>
+            <span class="step__num">1</span>
+            <div>
+              <h3 class="step__title">Hablamos</h3>
+              <p>Me cuentas cómo es tu negocio y qué necesitas. Te paso un presupuesto claro, sin compromiso.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num">2</span>
+            <div>
+              <h3 class="step__title">Diseño</h3>
+              <p>Preparo una propuesta visual con tu estilo y la ajustamos juntos hasta que te encante.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num">3</span>
+            <div>
+              <h3 class="step__title">Desarrollo</h3>
+              <p>Construyo la web: rápida, segura y perfecta en cualquier pantalla. Puedes ver cómo avanza.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num">4</span>
+            <div>
+              <h3 class="step__title">Lanzamiento</h3>
+              <p>La publico, te explico cómo funciona y te acompaño en los primeros días por si surge algo.</p>
+            </div>
+          </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. CONTACTO ============ -->
+    <section class="section contact" id="contacto" aria-labelledby="contacto-titulo">
+      <div class="container contact__inner" data-reveal>
+        <p class="eyebrow">Contacto</p>
+        <h2 class="contact__title" id="contacto-titulo">¿Hablamos de <em>tu web?</em></h2>
+        <p class="contact__lead">Cuéntame tu idea o tu negocio y te respondo lo antes posible con una propuesta.</p>
+
+        <!-- Email de contacto: si cambia, actualizarlo en el mailto, en el texto y en data-email -->
+        <div class="contact__actions">
+          <a class="contact__email" href="mailto:enzo.contacto.web@gmail.com?subject=Quiero%20una%20web%20para%20mi%20negocio">enzo.contacto.web@gmail.com</a>
+          <button class="btn btn--ghost copy-btn" type="button" data-email="enzo.contacto.web@gmail.com">
+            <span class="copy-btn__label">Copiar email</span>
+          </button>
+        </div>
+        <p class="copy-status sr-only" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>© <span id="anio">2026</span> Enzo · Diseño y desarrollo web</p>
+      <ul class="site-footer__links" role="list">
+        <li><a href="https://github.com/enzohola13-star" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="#inicio">Volver arriba ↑</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger desde CDN (versión fija) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

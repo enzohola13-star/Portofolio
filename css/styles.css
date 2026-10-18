@@ -1,0 +1,694 @@
+/* =========================================================
+   Portfolio de Enzo · Hoja de estilos
+   Mobile-first: estilos base para móvil, ampliados con
+   media queries (min-width) para tablet y escritorio.
+   ========================================================= */
+
+/* ---------- 1. Variables de diseño ---------- */
+:root {
+  /* Paleta oscura con acento lima */
+  --bg: #0c0c0e;
+  --bg-2: #131316;
+  --surface: #18181c;
+  --line: rgba(243, 242, 238, 0.09);
+  --line-strong: rgba(243, 242, 238, 0.18);
+  --text: #f3f2ee;
+  --muted: #9c9ba3;
+  --accent: #c8f560;
+  --accent-ink: #0c0c0e; /* texto sobre el acento */
+
+  /* Tipografía */
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Medidas */
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --section-y: clamp(5rem, 13vw, 9rem);
+  --header-h: 68px;
+  --radius: 14px;
+  --radius-lg: 22px;
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.4s;
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; }
+p { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; margin: 0; padding: 0; }
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+em { font-style: normal; color: var(--accent); }
+
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: fixed; top: 0.75rem; left: 0.75rem; z-index: 100;
+  padding: 0.6rem 1rem; border-radius: 8px;
+  background: var(--accent); color: var(--accent-ink);
+  transform: translateY(-200%); transition: transform 0.2s;
+}
+.skip-link:focus { transform: none; }
+
+.container { width: min(100% - 2 * var(--gutter), 1200px); margin-inline: auto; }
+
+/* ---------- 3. Tipografía reutilizable ---------- */
+.eyebrow {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.eyebrow::before { content: "/ "; color: var(--accent); }
+
+.section { padding-block: var(--section-y); }
+.section--alt { background: var(--bg-2); }
+
+.section-head { max-width: 44rem; margin-bottom: clamp(2.5rem, 7vw, 4.5rem); }
+.section-title { font-size: clamp(2.3rem, 8.5vw, 4.5rem); }
+
+/* ---------- 4. Botones y enlaces ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 52px;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: 600 0.95rem/1 var(--font-body);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--dur) var(--ease-out),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow var(--dur) var(--ease-out);
+}
+.btn:active { transform: scale(0.97); }
+.btn__icon { transition: transform var(--dur) var(--ease-out); }
+
+.btn--accent { background: var(--accent); color: var(--accent-ink); }
+.btn--light { background: var(--text); color: var(--bg); }
+.btn--ghost { border-color: var(--line-strong); background: transparent; color: var(--text); }
+.btn--small { min-height: 42px; padding: 0.6rem 1.1rem; font-size: 0.875rem; }
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-block: 0.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.25s ease;
+}
+.link-arrow span { transition: transform var(--dur) var(--ease-out); }
+
+/* Hover solo con ratón (en móvil los hovers se quedan "pegados") */
+@media (hover: hover) and (pointer: fine) {
+  .btn--accent:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -12px rgba(200, 245, 96, 0.55); }
+  .btn--light:hover { transform: translateY(-2px); background: #fff; }
+  .btn--ghost:hover { border-color: var(--text); }
+  .btn:hover .btn__icon { transform: translateX(3px); }
+  .link-arrow:hover { color: var(--text); }
+  .link-arrow:hover span { transform: translateX(4px); }
+}
+
+/* ---------- 5. Cabecera ---------- */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--header-h);
+  transition: transform 0.5s var(--ease-out), background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* Fondo translúcido al hacer scroll */
+.site-header.is-scrolled {
+  background: rgba(12, 12, 14, 0.78);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+  box-shadow: 0 1px 0 var(--line);
+}
+/* Se oculta al bajar y aparece al subir (clase desde main.js) */
+.site-header.is-hidden { transform: translateY(-100%); }
+
+.site-header__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+.logo span { color: var(--accent); }
+
+/* En móvil solo se ven el logo y el botón "Hablemos"; los enlaces aparecen en escritorio */
+.nav { display: none; }
+
+/* ---------- 6. Hero ---------- */
+.hero {
+  position: relative;
+  padding-top: calc(var(--header-h) + clamp(2.5rem, 8vw, 5rem));
+  padding-bottom: clamp(3.5rem, 9vw, 6rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Brillo suave de fondo */
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -20%;
+  right: -30%;
+  width: 90vw;
+  height: 90vw;
+  max-width: 900px;
+  max-height: 900px;
+  background: radial-gradient(closest-side, rgba(200, 245, 96, 0.12), transparent);
+  pointer-events: none;
+}
+
+.hero__grid { display: grid; gap: clamp(3rem, 8vw, 4rem); }
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+  padding: 0.45rem 0.9rem 0.45rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.status__dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+/* Pulso del punto "disponible" */
+.status__dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-out infinite;
+}
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+.hero__title { font-size: clamp(2.3rem, 10.4vw, 5.6rem); }
+
+/* Cada línea recorta su contenido para el efecto de aparición */
+.line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.line__inner { display: block; }
+
+.hero__lead {
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  font-size: 1.08rem;
+  color: var(--muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+/* ---------- 7. Maquetas (navegador y móvil) ---------- */
+.browser {
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8);
+}
+.browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 34px;
+  padding-inline: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+.browser__dots { display: flex; gap: 6px; }
+.browser__dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
+.browser__url {
+  flex: 1;
+  overflow: hidden;
+  padding: 0.2rem 0.7rem;
+  border-radius: 6px;
+  background: rgba(243, 242, 238, 0.05);
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.browser img { width: 100%; }
+
+.phone {
+  overflow: hidden;
+  border: 5px solid #26262b;
+  border-radius: 26px;
+  background: #000;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.85);
+}
+.phone img { width: 100%; aspect-ratio: 1 / 2; object-fit: cover; }
+
+.hero__visual {
+  position: relative;
+  padding-bottom: 12%;
+  padding-right: 8%;
+}
+.hero__phone {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 27%;
+}
+
+/* ---------- 8. Cinta en movimiento ---------- */
+.marquee {
+  overflow: hidden;
+  padding-block: 1.1rem;
+  border-block: 1px solid var(--line);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.marquee__track span {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+/* Separador entre elementos */
+.marquee__track span::after {
+  content: "✦";
+  margin-inline: 1.5rem;
+  font-size: 0.8em;
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); } /* el contenido está duplicado: -50% = bucle perfecto */
+}
+
+/* ---------- 9. Proyecto destacado ---------- */
+.project { display: grid; gap: 2rem; }
+
+.project__media {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  border-radius: var(--radius);
+}
+.project__img { overflow: hidden; }
+.project__img img { transition: transform 1s var(--ease-out); }
+
+/* Etiqueta "Ver web" que aparece sobre la imagen */
+.project__open {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform var(--dur) var(--ease-out), opacity 0.3s ease;
+}
+
+.project__meta { font-size: 0.85rem; color: var(--muted); }
+.project__title { margin-top: 0.5rem; font-size: clamp(2rem, 7vw, 3rem); }
+.project__desc { margin-top: 1rem; max-width: 36rem; color: var(--muted); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tags li {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Tarjeta "¿Tu negocio podría ser el siguiente?" */
+.next-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(3rem, 8vw, 5rem);
+  padding: 1.75rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.next-card__text {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.next-card__cta { font-weight: 600; color: var(--accent); }
+.next-card__cta span { display: inline-block; transition: transform var(--dur) var(--ease-out); }
+
+@media (hover: hover) and (pointer: fine) {
+  .project__media:hover .project__img img { transform: scale(1.03); }
+  .project__media:hover .project__open { transform: translateY(-3px); }
+  .next-card:hover { border-color: var(--accent); background: rgba(200, 245, 96, 0.04); }
+  .next-card:hover .next-card__cta span { transform: translateX(5px); }
+}
+
+/* ---------- 10. Servicios ---------- */
+.services { display: grid; gap: 1rem; }
+
+/* Tarjeta con brillo que sigue al ratón (--mx/--my desde main.js) */
+.service {
+  position: relative;
+  overflow: hidden;
+  padding: 1.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  transition: border-color 0.3s ease, transform 0.5s var(--ease-out);
+}
+.service::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(200, 245, 96, 0.1), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.service__num {
+  display: inline-block;
+  margin-bottom: 2.5rem;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+.service__title { font-size: 1.75rem; }
+.service p { margin-top: 0.75rem; color: var(--muted); }
+
+@media (hover: hover) and (pointer: fine) {
+  .service:hover { border-color: var(--line-strong); transform: translateY(-4px); }
+  .service:hover::before { opacity: 1; }
+}
+
+.includes {
+  margin-top: 1rem;
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  background: var(--text);
+  color: var(--bg);
+}
+.includes__title { font-size: 1.5rem; }
+.includes__list { display: grid; gap: 0.85rem; margin-top: 1.5rem; }
+.includes__list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-weight: 500;
+}
+/* Check verde lima con SVG en línea */
+.includes__list li::before {
+  content: "";
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23c8f560' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+
+/* ---------- 11. Proceso ---------- */
+.steps { position: relative; }
+.steps__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.5rem; }
+
+/* Línea vertical que conecta los pasos */
+.steps__line {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 21px;
+  width: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+.steps__progress {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: top;
+  transform: scaleY(1);
+}
+.anim .steps__progress { transform: scaleY(0); }
+
+.step { position: relative; display: grid; grid-template-columns: 44px 1fr; gap: 1.25rem; }
+.step__num {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bg);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+.step__title { margin-top: 0.4rem; font-size: 1.6rem; }
+.step p { margin-top: 0.5rem; max-width: 32rem; color: var(--muted); }
+
+/* ---------- 12. Contacto ---------- */
+.contact {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  isolation: isolate;
+}
+/* Brillo de fondo centrado */
+.contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: -40%;
+  width: 120vw;
+  max-width: 1100px;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(200, 245, 96, 0.13), transparent);
+  pointer-events: none;
+}
+.contact__inner { display: flex; flex-direction: column; align-items: center; }
+.contact__title { font-size: clamp(2.8rem, 13vw, 7rem); }
+.contact__lead { max-width: 30rem; margin-top: 1.25rem; color: var(--muted); font-size: 1.08rem; }
+
+.contact__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+/* Email grande: tamaño adaptable para que nunca se salga en móvil */
+.contact__email {
+  max-width: 100%;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 6vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 2px no-repeat;
+  padding-bottom: 0.2rem;
+  transition: color 0.25s ease;
+}
+.copy-btn.is-copied { border-color: var(--accent); color: var(--accent); }
+
+@media (hover: hover) and (pointer: fine) {
+  .contact__email:hover { color: var(--accent); }
+}
+
+/* ---------- 13. Footer ---------- */
+.site-footer {
+  padding-block: 2rem calc(2rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.site-footer__links { display: flex; gap: 1.5rem; }
+.site-footer__links a { text-decoration: none; transition: color 0.25s ease; }
+.site-footer__links a:hover { color: var(--text); }
+
+/* ---------- 14. Estados iniciales de las animaciones ----------
+   Solo con .anim (JS activo y sin movimiento reducido).
+   GSAP los lleva después a su estado final.                    */
+.anim .hero .line__inner { transform: translateY(105%); }
+.anim .hero__status,
+.anim .hero__lead,
+.anim .hero__actions,
+.anim .hero__visual { opacity: 0; }
+.anim [data-reveal]:not(.is-revealed) { opacity: 0; transform: translateY(30px); }
+
+/* ---------- 15. Tablet (≥ 640px) ---------- */
+@media (min-width: 640px) {
+  .services { grid-template-columns: repeat(2, 1fr); }
+  .services .service:last-child { grid-column: 1 / -1; }
+  .includes__list { grid-template-columns: repeat(2, 1fr); }
+  .contact__actions { flex-direction: row; gap: 1.5rem; }
+}
+
+/* ---------- 16. Escritorio (≥ 1024px) ---------- */
+@media (min-width: 1024px) {
+  :root { --header-h: 76px; }
+
+  .nav { display: block; }
+  .nav__list { display: flex; gap: 2.25rem; list-style: none; margin: 0; padding: 0; }
+  .nav__list a {
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  .nav__list a:hover,
+  .nav__list a:focus-visible { color: var(--text); }
+
+  .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; }
+  .hero__grid {
+    grid-template-columns: 1.15fr 1fr;
+    align-items: center;
+    gap: 4rem;
+  }
+  .hero__title { font-size: clamp(3rem, 4.6vw, 4.9rem); }
+  .hero .line__inner { white-space: nowrap; } /* cada frase en su línea */
+
+  .project {
+    grid-template-columns: 1.55fr 1fr;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .services { grid-template-columns: repeat(3, 1fr); }
+  .services .service:last-child { grid-column: auto; }
+  .service { padding: 2.25rem; min-height: 320px; }
+
+  .includes {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+    padding: 2.5rem;
+  }
+  .includes__list { margin-top: 0; }
+
+  /* Proceso en horizontal: 4 columnas con la línea arriba */
+  .steps__list { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .step { grid-template-columns: 1fr; gap: 1.5rem; }
+  .steps__line { top: 21px; bottom: auto; left: 0; right: 0; width: auto; height: 2px; }
+  .steps__progress { transform-origin: left; }
+  .anim .steps__progress { transform: scaleX(0); }
+
+  .next-card { padding: 2.25rem 2.5rem; }
+}
+
+/* ---------- 17. Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee__track { animation: none; }
+}
