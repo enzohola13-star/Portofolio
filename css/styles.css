@@ -59,7 +59,8 @@ img, svg { display: block; max-width: 100%; }
 img { height: auto; }
 a { color: inherit; }
 p { margin: 0; }
-ul[role="list"], ol[role="list"] { list-style: none; margin: 0; padding: 0; }
+/* :where() deja la especificidad en 0: las clases propias pueden poner márgenes */
+:where(ul[role="list"], ol[role="list"]) { list-style: none; margin: 0; padding: 0; }
 
 h1, h2, h3 {
   margin: 0;
@@ -359,6 +360,7 @@ em { font-style: normal; color: var(--accent); }
 
 /* ---------- 9. Proyecto destacado ---------- */
 .project { display: grid; gap: 2rem; }
+.project + .project { margin-top: clamp(4rem, 10vw, 7rem); } /* separación entre proyectos */
 
 .project__media {
   position: relative;
@@ -657,6 +659,9 @@ em { font-style: normal; color: var(--accent); }
     align-items: center;
     gap: 4rem;
   }
+  /* Proyectos alternos: imagen a la derecha */
+  .project--reverse { grid-template-columns: 1fr 1.55fr; }
+  .project--reverse .project__media { order: 2; }
 
   .services { grid-template-columns: repeat(3, 1fr); }
   .services .service:last-child { grid-column: auto; }
