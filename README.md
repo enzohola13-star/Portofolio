@@ -2,7 +2,7 @@
 
 Portfolio de Enzo, diseñador y desarrollador web freelance. Webs modernas, rápidas y a medida para negocios.
 
-🔗 **Ver la web:** [ENLACE DE NETLIFY]
+🔗 **Ver la web:** [enzo-webs.netlify.app](https://enzo-webs.netlify.app)
 
 ## Tecnologías
 
